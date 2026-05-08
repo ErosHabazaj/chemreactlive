@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    /* Deep navy scientific palette */
+    --background: 222 30% 6%;
+    --foreground: 210 20% 92%;
+
+    --card: 222 25% 10%;
+    --card-foreground: 210 20% 92%;
+
+    --popover: 222 25% 10%;
+    --popover-foreground: 210 20% 92%;
+
+    /* Bright teal/cyan — electron energy */
+    --primary: 174 72% 50%;
+    --primary-foreground: 222 30% 6%;
+
+    --secondary: 222 20% 16%;
+    --secondary-foreground: 210 20% 85%;
+
+    --muted: 222 18% 14%;
+    --muted-foreground: 215 15% 55%;
+
+    --accent: 210 100% 60%;
+    --accent-foreground: 210 20% 98%;
+
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 222 18% 18%;
+    --input: 222 18% 18%;
+    --ring: 174 72% 50%;
+
+    --radius: 0.75rem;
+
+    /* Chemistry-specific tokens */
+    --electron: 210 100% 62%;
+    --oxidation: 0 75% 60%;
+    --reduction: 174 72% 50%;
+    --success: 150 60% 45%;
+    --warning: 40 90% 55%;
+
+    --sidebar-background: 222 25% 8%;
+    --sidebar-foreground: 210 20% 85%;
+    --sidebar-primary: 174 72% 50%;
+    --sidebar-primary-foreground: 222 30% 6%;
+    --sidebar-accent: 222 20% 14%;
+    --sidebar-accent-foreground: 210 20% 85%;
+    --sidebar-border: 222 18% 18%;
+    --sidebar-ring: 174 72% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+  }
+
+  code, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* Electron glow animation */
+@keyframes electron-pulse {
+  0%, 100% { box-shadow: 0 0 4px 2px hsl(var(--electron) / 0.4); }
+  50% { box-shadow: 0 0 12px 4px hsl(var(--electron) / 0.8); }
+}
+
+@keyframes electron-move {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(120px); }
+}
+
+.electron-dot {
+  @apply rounded-full;
+  width: 10px;
+  height: 10px;
+  background: hsl(var(--electron));
+  animation: electron-pulse 1.5s ease-in-out infinite;
+}
+
+.glass-card {
+  background: hsl(var(--card) / 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid hsl(var(--border) / 0.5);
+}
