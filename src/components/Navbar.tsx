@@ -16,11 +16,11 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 glass-card border-b border-border/50">
-      <div className="container mx-auto flex items-center justify-between px-4 py-3">
-        <Link to="/" className="flex items-center gap-2 text-primary font-bold text-lg">
-          <Atom className="w-6 h-6" />
-          <span className="hidden sm:inline">ChemReact</span>
+    <nav className="sticky top-0 z-50 glass-card">
+      <div className="container mx-auto flex items-center justify-between px-4 py-2.5">
+        <Link to="/" className="flex items-center gap-2.5 font-bold text-lg" aria-label="ChemReact home">
+          <img src="/chemreact-logo.svg" alt="" className="h-10 w-7" aria-hidden="true" />
+          <span className="brand-wordmark hidden sm:inline">ChemReact</span>
         </Link>
         <div className="flex items-center gap-1">
           {navItems.map(({ path, label, icon: Icon }) => (
@@ -29,7 +29,7 @@ const Navbar = () => {
               to={path}
               className={`flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                 location.pathname === path
-                  ? "bg-primary/15 text-primary"
+                  ? "brand-nav-active"
                   : "text-muted-foreground hover:text-foreground hover:bg-secondary"
               }`}
             >

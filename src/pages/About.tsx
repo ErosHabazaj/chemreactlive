@@ -1,6 +1,5 @@
 import { Card } from "@/components/ui/card";
 import Navbar from "@/components/Navbar";
-import { Atom } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 const About = () => {
@@ -15,8 +14,10 @@ const About = () => {
 
           <Card className="p-6 bg-card border-border space-y-4">
             <div className="flex items-center gap-3 mb-2">
-              <Atom className="w-8 h-8 text-primary" />
-              <h2 className="text-xl font-bold text-foreground">ChemReact {t("heroTitle")}</h2>
+              <img src="/chemreact-logo.svg" alt="ChemReact logo" className="h-14 w-9" />
+              <h2 className="text-xl font-bold text-foreground">
+                <span className="brand-wordmark">ChemReact</span> {t("heroTitle")}
+              </h2>
             </div>
 
             <p className="text-sm text-foreground/80 leading-relaxed">

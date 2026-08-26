@@ -6,53 +6,53 @@
 
 @layer base {
   :root {
-    /* Deep navy scientific palette */
-    --background: 222 30% 6%;
-    --foreground: 210 20% 92%;
+    /* Logo-led deep ocean palette */
+    --background: 196 61% 6%;
+    --foreground: 165 60% 96%;
 
-    --card: 222 25% 10%;
-    --card-foreground: 210 20% 92%;
+    --card: 196 49% 9%;
+    --card-foreground: 165 60% 96%;
 
-    --popover: 222 25% 10%;
-    --popover-foreground: 210 20% 92%;
+    --popover: 196 49% 9%;
+    --popover-foreground: 165 60% 96%;
 
-    /* Bright teal/cyan — electron energy */
-    --primary: 174 72% 50%;
-    --primary-foreground: 222 30% 6%;
+    /* Exact colors sampled from the ChemReact mark */
+    --primary: 172 59% 63%;
+    --primary-foreground: 196 61% 6%;
 
-    --secondary: 222 20% 16%;
-    --secondary-foreground: 210 20% 85%;
+    --secondary: 193 48% 13%;
+    --secondary-foreground: 165 40% 90%;
 
-    --muted: 222 18% 14%;
-    --muted-foreground: 215 15% 55%;
+    --muted: 195 35% 12%;
+    --muted-foreground: 189 17% 61%;
 
-    --accent: 210 100% 60%;
-    --accent-foreground: 210 20% 98%;
+    --accent: 198 76% 52%;
+    --accent-foreground: 196 61% 6%;
 
-    --destructive: 0 72% 55%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 85% 69%;
+    --destructive-foreground: 196 61% 6%;
 
-    --border: 222 18% 18%;
-    --input: 222 18% 18%;
-    --ring: 174 72% 50%;
+    --border: 195 44% 17%;
+    --input: 195 44% 17%;
+    --ring: 172 59% 63%;
 
     --radius: 0.75rem;
 
     /* Chemistry-specific tokens */
-    --electron: 210 100% 62%;
-    --oxidation: 0 75% 60%;
-    --reduction: 174 72% 50%;
-    --success: 150 60% 45%;
+    --electron: 198 76% 52%;
+    --oxidation: 0 85% 69%;
+    --reduction: 172 59% 63%;
+    --success: 140 38% 54%;
     --warning: 40 90% 55%;
 
-    --sidebar-background: 222 25% 8%;
-    --sidebar-foreground: 210 20% 85%;
-    --sidebar-primary: 174 72% 50%;
-    --sidebar-primary-foreground: 222 30% 6%;
-    --sidebar-accent: 222 20% 14%;
-    --sidebar-accent-foreground: 210 20% 85%;
-    --sidebar-border: 222 18% 18%;
-    --sidebar-ring: 174 72% 50%;
+    --sidebar-background: 196 55% 7%;
+    --sidebar-foreground: 165 40% 90%;
+    --sidebar-primary: 172 59% 63%;
+    --sidebar-primary-foreground: 196 61% 6%;
+    --sidebar-accent: 193 48% 13%;
+    --sidebar-accent-foreground: 165 40% 90%;
+    --sidebar-border: 195 44% 17%;
+    --sidebar-ring: 172 59% 63%;
   }
 }
 
@@ -69,6 +69,64 @@
   code, .font-mono {
     font-family: 'IBM Plex Mono', monospace;
   }
+}
+
+.min-h-screen.bg-background {
+  background-color: hsl(var(--background));
+}
+
+.brand-wordmark {
+  color: hsl(var(--primary));
+  letter-spacing: -0.025em;
+}
+
+.brand-nav-active {
+  color: hsl(var(--primary));
+  background: hsl(var(--secondary));
+}
+
+.reaction-card {
+  border: 0;
+  box-shadow: 0 16px 34px hsl(196 70% 2% / 0.24);
+}
+
+.reaction-card--oxidation {
+  background-color: hsl(0 31% 18%);
+}
+
+.reaction-card--oxidation:hover,
+.reaction-card--combustion:hover {
+  background-color: hsl(0 33% 21%);
+}
+
+.reaction-card--reduction,
+.reaction-card--primary {
+  background-color: hsl(172 31% 16%);
+}
+
+.reaction-card--reduction:hover,
+.reaction-card--primary:hover {
+  background-color: hsl(172 33% 19%);
+}
+
+.reaction-card--combustion {
+  background-color: hsl(0 31% 18%);
+}
+
+.reaction-card--success {
+  background-color: hsl(140 25% 16%);
+}
+
+.reaction-card--success:hover {
+  background-color: hsl(140 27% 19%);
+}
+
+.reaction-card--electron {
+  background-color: hsl(198 35% 17%);
+}
+
+.reaction-card--electron:hover {
+  background-color: hsl(198 37% 20%);
 }
 
 /* Flat electron particles travelling along a figure-eight path. */
@@ -101,7 +159,11 @@
   background: hsl(var(--electron));
   box-shadow: 0 0 9px 3px hsl(var(--electron) / 0.7), 0 0 22px hsl(var(--electron) / 0.4);
 }
-.infinity-orbit__dot:nth-of-type(4) { animation-delay: -3.3s; }
+.infinity-orbit__dot:nth-of-type(4) {
+  animation-delay: -3.3s;
+  background: hsl(var(--success));
+  box-shadow: 0 0 9px 3px hsl(var(--success) / 0.65), 0 0 22px hsl(var(--success) / 0.35);
+}
 .infinity-orbit__dot:nth-of-type(5) {
   animation-delay: -4.4s;
   background: hsl(var(--electron));
@@ -115,7 +177,6 @@
 }
 
 .glass-card {
-  background: hsl(var(--card) / 0.6);
-  backdrop-filter: blur(12px);
-  border: 1px solid hsl(var(--border) / 0.5);
+  background: hsl(var(--card));
+  box-shadow: 0 14px 36px hsl(196 70% 2% / 0.28);
 }

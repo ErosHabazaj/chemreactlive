@@ -24,17 +24,17 @@ function getGridPosition(el: PeriodicElement): { row: number; col: number } {
 }
 
 const CATEGORY_COLORS: Record<string, string> = {
-  "alkali metal": "bg-red-500/20 border-red-500/40 hover:bg-red-500/30",
-  "alkaline earth metal": "bg-orange-500/20 border-orange-500/40 hover:bg-orange-500/30",
-  "transition metal": "bg-yellow-500/20 border-yellow-500/40 hover:bg-yellow-500/30",
-  "post-transition metal": "bg-green-500/20 border-green-500/40 hover:bg-green-500/30",
-  "metalloid": "bg-teal-500/20 border-teal-500/40 hover:bg-teal-500/30",
-  "nonmetal": "bg-sky-500/20 border-sky-500/40 hover:bg-sky-500/30",
-  "halogen": "bg-blue-500/20 border-blue-500/40 hover:bg-blue-500/30",
-  "noble gas": "bg-purple-500/20 border-purple-500/40 hover:bg-purple-500/30",
-  "lanthanide": "bg-pink-500/20 border-pink-500/40 hover:bg-pink-500/30",
-  "actinide": "bg-rose-500/20 border-rose-500/40 hover:bg-rose-500/30",
-  "unknown": "bg-muted/40 border-muted-foreground/20 hover:bg-muted/60",
+  "alkali metal": "bg-[#451b24] hover:bg-[#57222d]",
+  "alkaline earth metal": "bg-[#432817] hover:bg-[#56331d]",
+  "transition metal": "bg-[#403716] hover:bg-[#53471c]",
+  "post-transition metal": "bg-[#173827] hover:bg-[#1d4932]",
+  "metalloid": "bg-[#123a39] hover:bg-[#174b4a]",
+  "nonmetal": "bg-[#14374a] hover:bg-[#19485f]",
+  "halogen": "bg-[#182f50] hover:bg-[#1e3d67]",
+  "noble gas": "bg-[#302650] hover:bg-[#3e3167]",
+  "lanthanide": "bg-[#47213d] hover:bg-[#5b2a4f]",
+  "actinide": "bg-[#471e2b] hover:bg-[#5b2638]",
+  "unknown": "bg-secondary hover:bg-muted",
 };
 
 const CATEGORY_DOT_COLORS: Record<string, string> = {
@@ -88,17 +88,38 @@ function useElementLocale(el: PeriodicElement) {
   return { name: el.name, description: el.description };
 }
 
-function ElementCell({ el, onClick }: { el: PeriodicElement; onClick: () => void }) {
+function ElementCell({
+  el,
+  onClick,
+  onHover,
+  onHoverEnd,
+  isHovered,
+  isNeighbor,
+}: {
+  el: PeriodicElement;
+  onClick: () => void;
+  onHover: () => void;
+  onHoverEnd: () => void;
+  isHovered: boolean;
+  isNeighbor: boolean;
+}) {
   const pos = getGridPosition(el);
   const colorClass = CATEGORY_COLORS[el.category] || CATEGORY_COLORS["unknown"];
   const { name } = useElementLocale(el);
 
   return (
     <motion.button
-      whileHover={{ scale: 1.15, zIndex: 20 }}
+      animate={{
+        scale: isHovered ? 1.18 : isNeighbor ? 0.82 : 1,
+        zIndex: isHovered ? 20 : 1,
+      }}
+      transition={{ type: "spring", stiffness: 420, damping: 28 }}
       whileTap={{ scale: 0.95 }}
+      onMouseEnter={onHover}
+      onFocus={onHover}
+      onBlur={onHoverEnd}
       onClick={onClick}
-      className={`border rounded-md flex flex-col items-center justify-center cursor-pointer transition-colors relative ${colorClass}`}
+      className={`rounded-md flex flex-col items-center justify-center cursor-pointer transition-colors relative shadow-sm shadow-black/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${colorClass}`}
       style={{
         gridRow: pos.row,
         gridColumn: pos.col,
@@ -138,7 +159,7 @@ function DetailModal({ el, onClose }: { el: PeriodicElement; onClose: () => void
         exit={{ scale: 0.96, opacity: 0 }}
         transition={{ type: "spring", damping: 25, stiffness: 350 }}
         onClick={(e) => e.stopPropagation()}
-        className="bg-card border border-border rounded-xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 relative"
+        className="bg-card rounded-xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 relative"
       >
         <button onClick={onClose} className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors">
           <X className="w-5 h-5" />
@@ -146,7 +167,7 @@ function DetailModal({ el, onClose }: { el: PeriodicElement; onClose: () => void
 
         {/* Header */}
         <div className="flex items-start gap-4 mb-6">
-          <div className={`w-16 h-16 rounded-lg border-2 flex items-center justify-center text-2xl font-bold ${CATEGORY_COLORS[el.category] || ""}`}>
+          <div className={`w-16 h-16 rounded-lg flex items-center justify-center text-2xl font-bold ${CATEGORY_COLORS[el.category] || ""}`}>
             {el.symbol}
           </div>
           <div>
@@ -163,7 +184,7 @@ function DetailModal({ el, onClose }: { el: PeriodicElement; onClose: () => void
 
         {/* 3D Atomic Model */}
         <div className="mb-5">
-          <Suspense fallback={<div className="w-full aspect-square max-h-[280px] rounded-lg bg-secondary/20 flex items-center justify-center text-muted-foreground text-xs">Loading 3D model…</div>}>
+          <Suspense fallback={<div className="w-full aspect-square max-h-[280px] rounded-lg bg-secondary flex items-center justify-center text-muted-foreground text-xs">Loading 3D model…</div>}>
             <AtomicModel3D protons={el.protons} neutrons={el.neutrons} electrons={el.electrons} />
           </Suspense>
         </div>
@@ -191,8 +212,8 @@ function DetailModal({ el, onClose }: { el: PeriodicElement; onClose: () => void
         {/* Electron configuration */}
         <div className="mt-5 space-y-2">
           <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{t("propElectronConfig")}</h3>
-          <p className="font-mono text-sm text-foreground bg-secondary/50 rounded-md px-3 py-2">{el.electronConfiguration}</p>
-          <p className="font-mono text-xs text-muted-foreground bg-secondary/30 rounded-md px-3 py-1.5">{el.electronConfigurationNobleGas}</p>
+          <p className="font-mono text-sm text-foreground bg-secondary rounded-md px-3 py-2">{el.electronConfiguration}</p>
+          <p className="font-mono text-xs text-muted-foreground bg-muted rounded-md px-3 py-1.5">{el.electronConfigurationNobleGas}</p>
         </div>
       </motion.div>
     </motion.div>
@@ -201,7 +222,7 @@ function DetailModal({ el, onClose }: { el: PeriodicElement; onClose: () => void
 
 function Prop({ label, value }: { label: string; value: React.ReactNode }) {
   return (
-    <div className="bg-secondary/30 rounded-md px-3 py-2">
+    <div className="bg-secondary rounded-md px-3 py-2">
       <span className="text-[10px] text-muted-foreground uppercase tracking-wider block">{label}</span>
       <span className="text-foreground font-medium text-sm">{typeof value === "object" ? value : String(value)}</span>
     </div>
@@ -224,6 +245,11 @@ const LEGEND_KEYS: { key: string; translationKey: TranslationKey }[] = [
 const Explorer = () => {
   const { t } = useLanguage();
   const [selected, setSelected] = useState<PeriodicElement | null>(null);
+  const [hoveredAtomicNumber, setHoveredAtomicNumber] = useState<number | null>(null);
+  const hoveredElement = hoveredAtomicNumber === null
+    ? null
+    : ELEMENTS.find((element) => element.atomicNumber === hoveredAtomicNumber) ?? null;
+  const hoveredPosition = hoveredElement ? getGridPosition(hoveredElement) : null;
 
   return (
     <div className="min-h-screen bg-background">
@@ -248,14 +274,32 @@ const Explorer = () => {
         <div className="overflow-x-auto pb-4">
           <div
             className="grid gap-[2px] min-w-[800px]"
+            onMouseLeave={() => setHoveredAtomicNumber(null)}
             style={{
               gridTemplateColumns: "repeat(18, minmax(0, 1fr))",
               gridTemplateRows: "repeat(9, minmax(32px, 42px))",
             }}
           >
-            {ELEMENTS.map((el) => (
-              <ElementCell key={el.atomicNumber} el={el} onClick={() => setSelected(el)} />
-            ))}
+            {ELEMENTS.map((el) => {
+              const position = getGridPosition(el);
+              const isHovered = hoveredAtomicNumber === el.atomicNumber;
+              const isNeighbor = hoveredPosition !== null
+                && !isHovered
+                && Math.abs(position.row - hoveredPosition.row) <= 1
+                && Math.abs(position.col - hoveredPosition.col) <= 1;
+
+              return (
+                <ElementCell
+                  key={el.atomicNumber}
+                  el={el}
+                  onClick={() => setSelected(el)}
+                  onHover={() => setHoveredAtomicNumber(el.atomicNumber)}
+                  onHoverEnd={() => setHoveredAtomicNumber(null)}
+                  isHovered={isHovered}
+                  isNeighbor={isNeighbor}
+                />
+              );
+            })}
           </div>
         </div>
 

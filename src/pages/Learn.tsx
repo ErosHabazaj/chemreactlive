@@ -40,7 +40,7 @@ const reactionLessons: ReactionLesson[] = [
     titleKey: "singleDisplacement",
     icon: ArrowRightLeft,
     color: "text-oxidation",
-    iconBackground: "bg-oxidation/10 border-oxidation/25",
+    iconBackground: "reaction-card--oxidation",
     equation: "Zn + CuSO₄ → ZnSO₄ + Cu",
     pattern: "A + BC → AC + B",
     summary: {
@@ -61,7 +61,7 @@ const reactionLessons: ReactionLesson[] = [
     titleKey: "redoxElectronTransfer",
     icon: Atom,
     color: "text-reduction",
-    iconBackground: "bg-reduction/10 border-reduction/25",
+    iconBackground: "reaction-card--reduction",
     equation: "Zn + Cu²⁺ → Zn²⁺ + Cu",
     pattern: "oxidation + reduction",
     summary: {
@@ -82,7 +82,7 @@ const reactionLessons: ReactionLesson[] = [
     titleKey: "neutralization",
     icon: Beaker,
     color: "text-primary",
-    iconBackground: "bg-primary/10 border-primary/25",
+    iconBackground: "reaction-card--primary",
     equation: "HCl + NaOH → NaCl + H₂O",
     pattern: "acid + base → salt + water",
     summary: {
@@ -103,7 +103,7 @@ const reactionLessons: ReactionLesson[] = [
     titleKey: "combustion",
     icon: Flame,
     color: "text-destructive",
-    iconBackground: "bg-destructive/10 border-destructive/25",
+    iconBackground: "reaction-card--combustion",
     equation: "CH₄ + 2O₂ → CO₂ + 2H₂O",
     pattern: "hydrocarbon + O₂ → CO₂ + H₂O",
     summary: {
@@ -124,7 +124,7 @@ const reactionLessons: ReactionLesson[] = [
     titleKey: "synthesis",
     icon: Combine,
     color: "text-success",
-    iconBackground: "bg-success/10 border-success/25",
+    iconBackground: "reaction-card--success",
     equation: "2Na + Cl₂ → 2NaCl",
     pattern: "A + B → AB",
     summary: {
@@ -145,7 +145,7 @@ const reactionLessons: ReactionLesson[] = [
     titleKey: "decomposition",
     icon: SplitSquareHorizontal,
     color: "text-electron",
-    iconBackground: "bg-electron/10 border-electron/25",
+    iconBackground: "reaction-card--electron",
     equation: "2H₂O → 2H₂ + O₂",
     pattern: "AB → A + B",
     summary: {
@@ -179,11 +179,11 @@ const Learn = () => {
           <Card className="border-border bg-card p-6">
             <h2 className="mb-4 text-xl font-bold text-primary">{t("oxidationVsReduction")}</h2>
             <div className="grid gap-4 sm:grid-cols-2">
-              <div className="rounded-lg border border-oxidation/25 bg-oxidation/5 p-4">
+              <div className="reaction-card--oxidation rounded-lg p-4">
                 <strong className="text-oxidation">Oxidation</strong>
                 <p className="mt-2 text-sm leading-relaxed text-foreground/80">{t("oxidationExplanation")}</p>
               </div>
-              <div className="rounded-lg border border-reduction/25 bg-reduction/5 p-4">
+              <div className="reaction-card--reduction rounded-lg p-4">
                 <strong className="text-reduction">Reduction</strong>
                 <p className="mt-2 text-sm leading-relaxed text-foreground/80">{t("reductionExplanation")}</p>
               </div>
@@ -198,7 +198,7 @@ const Learn = () => {
             <p className="mb-4 text-sm leading-relaxed text-foreground/80">{t("activitySeriesExplanation")}</p>
             <div className="flex flex-wrap gap-1.5">
               {METALS.map((metal) => (
-                <span key={metal.symbol} className="rounded-md border border-border bg-secondary px-2.5 py-1.5 text-xs">
+                <span key={metal.symbol} className="rounded-md bg-secondary px-2.5 py-1.5 text-xs">
                   <strong className="text-foreground">{metal.symbol}</strong>
                   <span className="ml-1 text-muted-foreground">{metal.name}</span>
                 </span>
@@ -230,11 +230,11 @@ const Learn = () => {
                 <AccordionItem
                   key={lesson.id}
                   value={lesson.id}
-                  className="overflow-hidden rounded-xl border border-border bg-card px-5 data-[state=open]:border-primary/35"
+                  className="overflow-hidden rounded-xl bg-card px-5 shadow-lg shadow-black/10 transition-colors data-[state=open]:bg-secondary"
                 >
                   <AccordionTrigger className="gap-4 py-5 text-left hover:no-underline">
                     <span className="flex min-w-0 items-start gap-4">
-                      <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border ${lesson.iconBackground}`}>
+                      <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg ${lesson.iconBackground}`}>
                         <Icon className={`h-5 w-5 ${lesson.color}`} />
                       </span>
                       <span className="min-w-0">
@@ -245,7 +245,7 @@ const Learn = () => {
                     </span>
                   </AccordionTrigger>
                   <AccordionContent className="pb-5">
-                    <div className="grid gap-5 border-t border-border pt-5 md:grid-cols-[1.45fr_0.75fr]">
+                    <div className="grid gap-5 pt-5 md:grid-cols-[1.45fr_0.75fr]">
                       <div>
                         <h3 className="mb-2 text-xs font-semibold uppercase tracking-wider text-primary">
                           {language === "sq" ? "Si funksionon" : "How it works"}
@@ -259,7 +259,7 @@ const Learn = () => {
                           </span>
                           <code className="mt-1 block text-sm text-foreground">{lesson.pattern}</code>
                         </div>
-                        <div className="rounded-lg border border-primary/20 bg-primary/5 p-3 text-xs leading-relaxed text-foreground/80">
+                        <div className="reaction-card--primary rounded-lg p-3 text-xs leading-relaxed text-foreground/80">
                           <strong className="text-primary">{language === "sq" ? "Ideja kryesore: " : "Key idea: "}</strong>
                           {localize(lesson.takeaway)}
                         </div>

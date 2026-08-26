@@ -14,7 +14,7 @@ const Index = () => {
       description: t("singleDisplacementDesc"),
       example: "Zn + CuSO₄ → ZnSO₄ + Cu",
       color: "text-oxidation",
-      bgColor: "bg-oxidation/10 border-oxidation/20 hover:border-oxidation/40",
+      surface: "reaction-card--oxidation",
     },
     {
       title: t("redoxElectronTransfer"),
@@ -22,7 +22,7 @@ const Index = () => {
       description: t("redoxDesc"),
       example: "Zn + Cu²⁺ → Zn²⁺ + Cu",
       color: "text-reduction",
-      bgColor: "bg-reduction/10 border-reduction/20 hover:border-reduction/40",
+      surface: "reaction-card--reduction",
     },
     {
       title: t("neutralization"),
@@ -30,7 +30,7 @@ const Index = () => {
       description: t("neutralizationDesc"),
       example: "HCl + NaOH → NaCl + H₂O",
       color: "text-primary",
-      bgColor: "bg-primary/10 border-primary/20 hover:border-primary/40",
+      surface: "reaction-card--primary",
     },
     {
       title: t("combustion"),
@@ -38,7 +38,7 @@ const Index = () => {
       description: t("combustionDesc"),
       example: "CH₄ + 2O₂ → CO₂ + 2H₂O",
       color: "text-destructive",
-      bgColor: "bg-destructive/10 border-destructive/20 hover:border-destructive/40",
+      surface: "reaction-card--combustion",
     },
     {
       title: t("synthesis"),
@@ -46,7 +46,7 @@ const Index = () => {
       description: t("synthesisDesc"),
       example: "2Na + Cl₂ → 2NaCl",
       color: "text-success",
-      bgColor: "bg-success/10 border-success/20 hover:border-success/40",
+      surface: "reaction-card--success",
     },
     {
       title: t("decomposition"),
@@ -54,7 +54,7 @@ const Index = () => {
       description: t("decompositionDesc"),
       example: "2H₂O → 2H₂ + O₂",
       color: "text-electron",
-      bgColor: "bg-electron/10 border-electron/20 hover:border-electron/40",
+      surface: "reaction-card--electron",
     },
   ];
 
@@ -69,7 +69,7 @@ const Index = () => {
             ))}
           </div>
           <h1 className="text-4xl sm:text-6xl font-bold text-foreground mb-4 leading-tight">
-            Chem<span className="text-primary">React</span> {t("heroTitle")}
+            <span className="brand-wordmark">ChemReact</span> {t("heroTitle")}
           </h1>
         </div>
 
@@ -77,11 +77,11 @@ const Index = () => {
           {reactionTypes.map((r) => (
             <div key={r.title}>
               <Link to="/simulator">
-                <Card className={`p-6 border-2 transition-all cursor-pointer group h-full ${r.bgColor}`}>
+                <Card className={`reaction-card p-6 transition-colors cursor-pointer group h-full ${r.surface}`}>
                   <r.icon className={`w-10 h-10 ${r.color} mb-4`} />
                   <h2 className="text-lg font-bold text-foreground mb-2">{r.title}</h2>
                   <p className="text-sm text-muted-foreground mb-4">{r.description}</p>
-                  <div className="font-mono text-sm text-foreground/70 bg-background/50 rounded px-3 py-2 mb-4">
+                  <div className="font-mono text-sm text-foreground/70 bg-background/50 rounded-xl px-3 py-2 mb-4">
                     {r.example}
                   </div>
                   <span className={`inline-flex items-center gap-1 text-sm font-medium ${r.color} group-hover:gap-2 transition-all`}>
