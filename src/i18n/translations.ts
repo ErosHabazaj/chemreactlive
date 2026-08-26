@@ -170,7 +170,7 @@ export const translations = {
   stepNetIonic: { en: "Net Ionic Equation", sq: "Ekuacioni Jonik Neto" },
 
   // Learn page
-  learnTitle: { en: "Learn: Redox & Displacement", sq: "Mëso: Redoks & Zëvendësim" },
+  learnTitle: { en: "Learn: Six Core Reactions", sq: "Mëso: Gjashtë Reaksione Kryesore" },
   oxidationVsReduction: { en: "Oxidation vs Reduction", sq: "Oksidimi kundër Reduktimit" },
   oxidationExplanation: {
     en: "is the loss of electrons. When a metal atom gives up electrons, it becomes a positively charged ion. Its oxidation state increases (e.g., Zn: 0 → +2).",

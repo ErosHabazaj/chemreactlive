@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Play, Pause, RotateCcw, Thermometer } from "lucide-react";
@@ -499,25 +499,19 @@ const DecompositionVisualizer = ({ reaction }: Props) => {
       </div>
 
       {/* Phase indicator */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={phase}
-          className={`rounded-lg border p-3 text-center text-sm ${
-            phase === "separated"
-              ? "border-primary/40 bg-primary/5 text-foreground/80"
-              : phase === "breaking"
-                ? "border-destructive/40 bg-destructive/5 text-foreground/80"
-                : phase === "heating"
-                  ? "border-orange-500/40 bg-orange-500/5 text-foreground/80"
-                  : "border-border bg-secondary/30 text-muted-foreground"
-          }`}
-          initial={{ opacity: 0, y: 6 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -6 }}
-        >
-          {phaseLabels[phase][language]}
-        </motion.div>
-      </AnimatePresence>
+      <div
+        className={`rounded-lg border p-3 text-center text-sm ${
+          phase === "separated"
+            ? "border-primary/40 bg-primary/5 text-foreground/80"
+            : phase === "breaking"
+              ? "border-destructive/40 bg-destructive/5 text-foreground/80"
+              : phase === "heating"
+                ? "border-orange-500/40 bg-orange-500/5 text-foreground/80"
+                : "border-border bg-secondary/30 text-muted-foreground"
+        }`}
+      >
+        {phaseLabels[phase][language]}
+      </div>
 
       {/* Info panels */}
       <div className="grid grid-cols-4 gap-2">

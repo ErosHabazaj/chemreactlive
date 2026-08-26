@@ -133,9 +133,9 @@ function DetailModal({ el, onClose }: { el: PeriodicElement; onClose: () => void
       onClick={onClose}
     >
       <motion.div
-        initial={{ scale: 0.85, opacity: 0, y: 30 }}
-        animate={{ scale: 1, opacity: 1, y: 0 }}
-        exit={{ scale: 0.85, opacity: 0, y: 30 }}
+        initial={{ scale: 0.96, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.96, opacity: 0 }}
         transition={{ type: "spring", damping: 25, stiffness: 350 }}
         onClick={(e) => e.stopPropagation()}
         className="bg-card border border-border rounded-xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto p-6 relative"
@@ -229,10 +229,10 @@ const Explorer = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <div className="container mx-auto px-4 py-8">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-6">
+        <div className="mb-6">
           <h1 className="text-3xl font-bold text-foreground mb-2">{t("elementExplorer")}</h1>
           <p className="text-muted-foreground">{t("explorerSubtitle")}</p>
-        </motion.div>
+        </div>
 
         {/* Legend */}
         <div className="flex flex-wrap gap-2 mb-6">

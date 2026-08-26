@@ -347,10 +347,8 @@ const ElectronVisualizer = ({
       </div>
 
       {/* Step description */}
-      <motion.div
+      <div
         key={currentStep}
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
         className={`rounded-lg border p-4 ${highlightColors[step.highlight || 'result']}`}
       >
         <div className="flex items-center gap-2 mb-1">
@@ -360,7 +358,7 @@ const ElectronVisualizer = ({
           <h4 className="font-semibold text-sm">{bi(step.title)}</h4>
         </div>
         <p className="text-sm text-foreground/80 font-mono leading-relaxed">{bi(step.description)}</p>
-      </motion.div>
+      </div>
 
       {/* Navigation */}
       <div className="flex items-center justify-between">

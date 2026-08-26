@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useLanguage } from "@/i18n/LanguageContext";
 import type { ReactionResult } from "@/engine/chemistryEngine";
 import { getMetal, METALS } from "@/data/chemistryData";
@@ -312,18 +312,9 @@ const SingleDisplacementVisualizer = ({ result, metalSymbol, saltCationSymbol, a
       </div>
 
       {/* Phase description */}
-      <AnimatePresence mode="wait">
-        <motion.p
-          key={phase}
-          className="text-sm text-foreground/80 leading-relaxed text-center"
-          initial={{ opacity: 0, y: 6 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -6 }}
-          transition={{ duration: 0.3 }}
-        >
-          {phaseDescriptions[phase][language]}
-        </motion.p>
-      </AnimatePresence>
+      <p className="text-sm text-foreground/80 leading-relaxed text-center">
+        {phaseDescriptions[phase][language]}
+      </p>
 
       {/* Activity Series Bar */}
       <div className="space-y-1.5">

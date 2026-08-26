@@ -526,25 +526,19 @@ const CombustionVisualizer = ({ compound }: Props) => {
       </div>
 
       {/* Phase description */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={phase}
-          className={`rounded-lg border p-3 text-center text-sm ${
-            phase === "complete"
-              ? "border-success/40 bg-success/5 text-foreground/80"
-              : phase === "collision"
-                ? "border-destructive/40 bg-destructive/5 text-foreground/80"
-                : phase === "products"
-                  ? "border-primary/40 bg-primary/5 text-foreground/80"
-                  : "border-border bg-secondary/30 text-muted-foreground"
-          }`}
-          initial={{ opacity: 0, y: 6 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -6 }}
-        >
-          {phaseLabels[phase][language]}
-        </motion.div>
-      </AnimatePresence>
+      <div
+        className={`rounded-lg border p-3 text-center text-sm ${
+          phase === "complete"
+            ? "border-success/40 bg-success/5 text-foreground/80"
+            : phase === "collision"
+              ? "border-destructive/40 bg-destructive/5 text-foreground/80"
+              : phase === "products"
+                ? "border-primary/40 bg-primary/5 text-foreground/80"
+                : "border-border bg-secondary/30 text-muted-foreground"
+        }`}
+      >
+        {phaseLabels[phase][language]}
+      </div>
 
       {/* Bond energy comparison */}
       <div className="grid grid-cols-2 gap-3">

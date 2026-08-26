@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRightLeft, Atom, ArrowRight, Beaker, Flame, Combine, SplitSquareHorizontal } from "lucide-react";
 import { Card } from "@/components/ui/card";
@@ -63,33 +62,20 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <div className="container mx-auto px-4 py-16 sm:py-24">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
-          <div className="inline-flex items-center gap-6 mb-4">
-            <div className="electron-dot" />
-            <div className="electron-dot" />
-            <div className="electron-dot" />
+        <div className="text-center mb-12">
+          <div className="infinity-orbit mx-auto mb-5" aria-hidden="true">
+            {[0, 1, 2, 3, 4].map((dot) => (
+              <span key={dot} className="infinity-orbit__dot" />
+            ))}
           </div>
           <h1 className="text-4xl sm:text-6xl font-bold text-foreground mb-4 leading-tight">
             Chem<span className="text-primary">React</span> {t("heroTitle")}
           </h1>
-          <p className="text-lg text-muted-foreground max-w-lg mx-auto">
-            {t("heroSubtitle")}
-          </p>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {reactionTypes.map((r, i) => (
-            <motion.div
-              key={r.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 + i * 0.08 }}
-            >
+          {reactionTypes.map((r) => (
+            <div key={r.title}>
               <Link to="/simulator">
                 <Card className={`p-6 border-2 transition-all cursor-pointer group h-full ${r.bgColor}`}>
                   <r.icon className={`w-10 h-10 ${r.color} mb-4`} />
@@ -103,7 +89,7 @@ const Index = () => {
                   </span>
                 </Card>
               </Link>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

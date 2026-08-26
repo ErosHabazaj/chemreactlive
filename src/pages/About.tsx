@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import Navbar from "@/components/Navbar";
 import { Atom } from "lucide-react";
@@ -11,7 +10,7 @@ const About = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <div className="container mx-auto px-4 py-8 max-w-2xl">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+        <div>
           <h1 className="text-3xl font-bold text-foreground mb-8">{t("aboutTitle")}</h1>
 
           <Card className="p-6 bg-card border-border space-y-4">
@@ -35,20 +34,11 @@ const About = () => {
               </ul>
             </div>
 
-            <div className="border-t border-border pt-4 space-y-2">
-              <h3 className="font-semibold text-foreground text-sm">{t("groupMembers")}</h3>
-              <ul className="list-disc list-inside text-sm text-foreground/70 space-y-1">
-                <li><strong>Eros Habazaj</strong> — Group Leader / Manager</li>
-                <li>Riseld Logu</li>
-                <li>Alons Fejzo</li>
-              </ul>
-            </div>
-
             <p className="text-xs text-muted-foreground border-t border-border pt-4">
               ⚠️ <strong>Disclaimer:</strong> {t("disclaimer")}
             </p>
           </Card>
-        </motion.div>
+        </div>
       </div>
     </div>
   );
