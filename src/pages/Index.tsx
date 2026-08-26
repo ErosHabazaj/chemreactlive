@@ -61,9 +61,9 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <div className="container mx-auto px-4 py-16 sm:py-24">
-        <div className="text-center mb-12">
-          <div className="infinity-orbit mx-auto mb-5" aria-hidden="true">
+      <div className="container mx-auto px-4 pt-16 pb-16 sm:pb-24">
+        <div className="text-center mb-16">
+          <div className="infinity-orbit mx-auto mb-16" aria-hidden="true">
             {[0, 1, 2, 3, 4].map((dot) => (
               <span key={dot} className="infinity-orbit__dot" />
             ))}
