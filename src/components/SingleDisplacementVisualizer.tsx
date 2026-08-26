@@ -317,11 +317,11 @@ const SingleDisplacementVisualizer = ({ result, metalSymbol, saltCationSymbol, a
       </p>
 
       {/* Activity Series Bar */}
-      <div className="space-y-1.5">
+      <div>
         <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
           {language === "sq" ? "Seria e Aktivitetit" : "Activity Series"}
         </p>
-        <div className="flex items-end gap-[2px] h-12">
+        <div className="mt-4 flex h-16 items-end gap-[2px]">
           {activityData.map(m => {
             const height = Math.max(12, 48 - m.rank * 2.2);
             const isHighlighted = m.isIncoming || m.isDisplaced;
@@ -353,7 +353,7 @@ const SingleDisplacementVisualizer = ({ result, metalSymbol, saltCationSymbol, a
             );
           })}
         </div>
-        <div className="flex justify-between text-[8px] text-muted-foreground px-1">
+        <div className="mt-1 flex justify-between text-[8px] text-muted-foreground px-1">
           <span>← {language === "sq" ? "Më reaktiv" : "More reactive"}</span>
           <span>{language === "sq" ? "Më pak reaktiv" : "Less reactive"} →</span>
         </div>

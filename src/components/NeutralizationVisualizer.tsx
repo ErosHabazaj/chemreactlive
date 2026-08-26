@@ -524,11 +524,10 @@ const NeutralizationVisualizer = ({ acid, base, isExothermic }: Props) => {
       {/* Exothermic indicator */}
       {isExothermic && phase === "complete" && (
         <motion.div
-          className="flex items-center justify-center gap-2 text-xs text-destructive"
+          className="flex items-center justify-center text-xs text-destructive"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          <span>🔥</span>
           <span>{language === "sq" ? "Reagimi lëshon nxehtësi (ekzotermik)" : "Reaction releases heat (exothermic)"}</span>
         </motion.div>
       )}
